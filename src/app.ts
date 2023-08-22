@@ -18,6 +18,6 @@ connectToDatabase()
       console.log(`Servidor escuchando en el puerto ${PORT}`);
     });
   })
-  .catch(error => {
+  .catch((error) => {
     console.error('Error al conectar a la base de datos:', error);
   });
