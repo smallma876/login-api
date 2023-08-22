@@ -1,5 +1,5 @@
-import UserModel, { User } from "../models/user.model";
-import { Request, Response } from "express";
+import UserModel, { User } from '../models/user.model';
+import { Request, Response } from 'express';
 
 const createUser = async (req: Request, res: Response) => {
   try {
@@ -12,15 +12,29 @@ const createUser = async (req: Request, res: Response) => {
     };
 
     const user = await UserModel.create(newUser);
-    console.log("Usuario creado:", user);
+    console.log('Usuario creado:', user);
 
-    res.status(201).json({ message: "Usuario creado", user });
+    res.status(201).json({ message: 'Usuario creado', user });
   } catch (error) {
-    console.error("Error al crear usuario:", error);
+    console.error('Error al crear usuario:', error);
     res.status(500).json({
-      message: "Ha ocurrido un error interno del servidor",
+      message: 'Ha ocurrido un error interno del servidor',
     });
   }
 };
 
-export { createUser };
+const getUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await UserModel.find();
+    console.log('Usuarios:', users);
+
+    res.status(200).json({ users });
+  } catch (error) {
+    console.error('Error al obtener usuarios:', error);
+    res.status(500).json({
+      message: 'Ha ocurrido un error interno del servidor',
+    });
+  }
+};
+
+export { createUser, getUsers };

@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser } from './controllers/user.controller';
+import { createUser, getUsers } from './controllers/user.controller';
 import connectToDatabase from './utils/database';
 
 const app = express();
@@ -12,6 +12,7 @@ connectToDatabase()
     console.log('Conectado a la base de datos login');
 
     app.post('/users', createUser);
+    app.get('/users', getUsers);
 
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
