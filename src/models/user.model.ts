@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document } from 'mongoose';
 
 export interface User {
   username: string;
@@ -18,6 +18,6 @@ const userSchema: Schema = new Schema({
   profile_image_url: String,
 });
 
-const UserModel = mongoose.model<IUser>("User", userSchema);
+const UserModel = mongoose.model<IUser>('User', userSchema);
 
 export default UserModel;
