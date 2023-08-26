@@ -1,10 +1,14 @@
 {
+  "ts-node": {
+    "files": true
+  },
+  "files": ["src/app.ts", "src/types.d.ts"],
   "compilerOptions": {
     "target": "ES2020",
     "module": "commonjs",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
-      "*": ["./src/*"]
+      "*": ["*"]
     },
     "outDir": "./dist",
     "esModuleInterop": true,
@@ -12,6 +16,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "./src/types.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

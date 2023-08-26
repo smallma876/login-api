@@ -1,9 +1,9 @@
 import express from 'express';
-import { createUser, getUsers } from './controllers/user.controller';
 import connectToDatabase from './utils/database';
+import tweetRoutes from './routes/tweet.routes';
+import userRoutes from './routes/user.routes';
 
 const app = express();
-const unusedVariable = "I'm not used";
 // Middleware para analizar el cuerpo de las solicitudes como JSON
 app.use(express.json());
 
@@ -11,8 +11,8 @@ connectToDatabase()
   .then(() => {
     console.log('Conectado a la base de datos login');
 
-    app.post('/users', createUser);
-    app.get('/users', getUsers);
+    app.use('/', userRoutes);
+    app.use('/tweets', tweetRoutes);
 
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {

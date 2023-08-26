@@ -1,4 +1,4 @@
-modules.exports = {
+module.exports = {
   root: true,
   plugins: ['@typescript-eslint', 'import', 'prettier'],
   extends: [
@@ -9,6 +9,8 @@ modules.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: './login/tsconfig.eslint.json',
+    project: './tsconfig.eslint.json',
+    tsconfigRootDir: __dirname,
+    module: true,
   },
 };
