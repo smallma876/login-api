@@ -3,7 +3,7 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.post('/tweets', postTweet);
-router.get('/tweets', getTweets);
+router.post('/create', postTweet);
+router.get('/list', getTweets);
 
 export default router;

@@ -1,9 +1,12 @@
 import express from 'express';
+import cors from 'cors';
 import connectToDatabase from './utils/database';
 import tweetRoutes from './routes/tweet.routes';
 import userRoutes from './routes/user.routes';
+import { authMiddleware } from 'middleware/auth.middleware';
 
-const app = express();
+export const app = express();
+app.use(cors());
 // Middleware para analizar el cuerpo de las solicitudes como JSON
 app.use(express.json());
 
@@ -12,7 +15,7 @@ connectToDatabase()
     console.log('Conectado a la base de datos login');
 
     app.use('/', userRoutes);
-    app.use('/tweets', tweetRoutes);
+    app.use('/tweets', authMiddleware, tweetRoutes);
 
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
