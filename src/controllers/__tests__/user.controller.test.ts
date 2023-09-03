@@ -1,7 +1,9 @@
-import { registerUser, loginUser } from './../user.controller';
+import { registerUser } from '../user.controller';
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import UserModel from './../../models/user.model';
+import UserModel from '../../models/user.model';
+import { requestRegisterUser } from './__mocks__/user.controller.mock';
+import { mapperRequestToUser } from 'mappers/user.mapper';
 
 jest.mock('./../../models/user.model');
 jest.mock('bcryptjs');
@@ -11,25 +13,12 @@ describe('registerUser', () => {
     const req = {} as Request;
     const res = {} as Response;
 
-    req.body = {
-      username: 'testuser',
-      email: 'test@example.com',
-      password: 'testpassword',
-      fullName: 'Test User',
-      profileImageUrl: 'http://example.com/test.jpg',
-    };
-
-    const mockUser = {
-      username: 'testuser',
-      email: 'test@example.com',
-      hashed_password: 'hashedpassword',
-      full_name: 'Test User',
-      profile_image_url: 'http://example.com/test.jpg',
-    };
+    req.body = requestRegisterUser;
+    const responseMock = await mapperRequestToUser(requestRegisterUser);
 
     (bcrypt.genSalt as jest.Mock).mockResolvedValue('somesalt');
     (bcrypt.hash as jest.Mock).mockResolvedValue('hashedpassword');
-    (UserModel.create as jest.Mock).mockResolvedValue(mockUser);
+    (UserModel.create as jest.Mock).mockResolvedValue(responseMock);
 
     res.status = jest.fn().mockReturnThis();
     res.json = jest.fn();
@@ -39,7 +28,7 @@ describe('registerUser', () => {
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
       message: 'Usuario creado',
-      user: mockUser,
+      user: responseMock,
     });
   });
 });

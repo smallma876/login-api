@@ -1,21 +1,13 @@
-import UserModel, { User } from '../models/user.model';
+import UserModel from '../models/user.model';
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { SECRET_KEY } from '../globals';
+import { mapperRequestToUser } from 'mappers/user.mapper';
 
 const registerUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const salt = await bcrypt.genSalt(10); // genera una sal con 10 rondas (puedes ajustar este número según tus necesidades)
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
-    const newUser: User = {
-      username: req.body.username,
-      email: req.body.email,
-      hashed_password: hashedPassword,
-      full_name: req.body.fullName,
-      profile_image_url: req.body.profileImageUrl,
-    };
+    const newUser = await mapperRequestToUser(req.body);
 
     const user = await UserModel.create(newUser);
     console.log('Usuario creado:', user);
