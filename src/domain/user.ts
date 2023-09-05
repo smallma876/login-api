@@ -5,3 +5,8 @@ export interface RequestRegisterUser {
   fullName: string;
   profileImageUrl: string;
 }
+
+export interface RequestLoginUser {
+  email: string;
+  password: string;
+}

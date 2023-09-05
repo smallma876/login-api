@@ -10,6 +10,7 @@ const config: Config = {
     '!src/models/**/*.ts',
     '!src/routes/**/*.ts',
     '!src/mappers/**/*.ts',
+    '!src/**/__tests__/**/*.ts',
     '!src/globals.ts',
   ],
   transform: {

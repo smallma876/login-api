@@ -1,8 +1,9 @@
+import { RequestPostTweet } from 'domain/tweet';
 import { Request, Response } from 'express';
 import TweetModel, { Tweet } from 'models/tweet.model';
 
 export const postTweet = async (req: Request, res: Response) => {
-  const { content, replyTo } = req.body;
+  const { content, replyTo } = req.body as RequestPostTweet;
 
   if (!content) {
     return res.status(400).json({ message: 'El contenido es requerido' });
