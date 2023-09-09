@@ -36,7 +36,7 @@ export const postTweet = async (req: Request, res: Response) => {
   }
 };
 
-export const getTweets = async (req: Request, res: Response) => {
+/* export const getTweets = async (req: Request, res: Response) => {
   try {
     const tweets = await TweetModel.find()
       .populate('author')
@@ -45,4 +45,4 @@ export const getTweets = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({ message: 'Error al obtener los tweets' });
   }
-};
+}; */
