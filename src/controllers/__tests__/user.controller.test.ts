@@ -79,7 +79,7 @@ describe('loginUser', () => {
 
     await loginUser(req, res);
 
-    expect(res.cookie).toHaveBeenCalledWith('access_token', 'token', {
+    expect(res.cookie).toHaveBeenCalledWith('access_token', 'Bearer token', {
       secure: false,
     });
     expect(res.status).toHaveBeenCalledWith(200);

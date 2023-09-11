@@ -1,12 +1,21 @@
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import connectToDatabase from './utils/database';
 import tweetRoutes from './routes/tweet.routes';
 import userRoutes from './routes/user.routes';
 import { authMiddleware } from 'middleware/auth.middleware';
 
 export const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:4200', // Aquí especifica tu origen exacto, no un wildcard
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Esto permite el envío de cookies
+    optionsSuccessStatus: 204,
+  })
+);
+app.use(cookieParser());
 // Middleware para analizar el cuerpo de las solicitudes como JSON
 app.use(express.json());
 

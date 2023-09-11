@@ -11,7 +11,7 @@ export const authMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.header('Authorization')?.split('Bearer ')[1];
+  const token = req.cookies.access_token?.split('Bearer ')[1];
   if (!token) {
     return res.status(401).json({ message: 'No se ha enviado un token' });
   }

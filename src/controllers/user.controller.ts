@@ -39,7 +39,7 @@ const loginUser = async (req: Request, res: Response) => {
     const payload = { userId: user.id };
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
 
-    res.cookie('access_token', token, { secure: false }).status(200).json({
+    res.cookie('access_token', `Bearer ${token}`, { secure: false }).status(200).json({
       success: true,
       user,
     });
